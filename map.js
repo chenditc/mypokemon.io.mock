@@ -136,7 +136,7 @@ function reload_map_items() {
         progress_bar.style.visibility = "";
     }
 
-    console.log("reloaded " + str(item_list.length) + " items");
+    console.log("reloaded " + String(item_list.length) + " items");
 
 }
 
