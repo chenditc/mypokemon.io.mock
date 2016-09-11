@@ -80,7 +80,7 @@ function get_pushpin_from_map_item(map_item) {
                 // already expired, skip it
                 return null;
             }
-            icon_url = 'https://s3-us-west-2.amazonaws.com/pokemon-map/icons/pokemon/' + map_item['pokemon_id'] + '.png';
+            icon_url = 'images/pushpin_images/pokemon/' + map_item['pokemon_id'] + '.png';
             title = get_expire_time_from_epoch(map_item['expire'])
         }
         // gym logic
@@ -121,6 +121,7 @@ function reload_map_items() {
         if (pushpin !== null ){
             layer.add(pushpin)
         }
+        console.log(pushpin)
     }
     // Update map with latest pins
     map_manager.map.layers.clear();
