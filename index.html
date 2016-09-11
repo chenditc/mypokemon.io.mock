@@ -1,0 +1,255 @@
+<!doctype html>
+<!--
+  Material Design Lite
+  Copyright 2015 Google Inc. All rights reserved.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      https://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License
+-->
+<html lang="en">
+  <head>
+    <script type="text/javascript">
+        var host = "mypokemon.io";
+        if ((host == window.location.host) && (window.location.protocol != "https:"))
+            window.location.protocol = "https";
+    </script>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="A simple tool to help you catch more pokemon.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <title>mypokemon.io -- Your Pokemon Map</title>
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="images/android-desktop.png">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="mypokemon.io">
+    <link rel="apple-touch-icon-precomposed" href="images/ios-desktop.png">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#3372DF">
+
+    <link rel="shortcut icon" href="images/favicon.png">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.red-orange.min.css">
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- growing io -->
+    <script type='text/javascript'>
+        var _vds = _vds || [];
+        window._vds = _vds;
+        (function(){
+          _vds.push(['setAccountId', '8af8c4ef089b591a']);
+          (function() {
+            var vds = document.createElement('script');
+            vds.type='text/javascript';
+            vds.async = true;
+            vds.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'dn-growing.qbox.me/vds.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(vds, s);
+          })();
+        })();
+    </script>
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-7776910507991738",
+        enable_page_level_ads: true
+      });
+    </script>
+  </head>
+  <body>
+    <div id="navdrawer" class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+      <header class="demo-header mdl-layout__header mdl-color--red-700 mdl-color-text--white">
+        <div class="mdl-layout__header-row">
+          <span id="home_title" class="mdl-layout-title">Pokemon Map</span>
+          <div class="mdl-layout-spacer"></div>
+          <!-- Search is not ready
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+            <label class="mdl-button mdl-js-button mdl-button--icon" for="search">
+              <i class="material-icons">search</i>
+            </label>
+            <div class="mdl-textfield__expandable-holder">
+              <input class="mdl-textfield__input" type="text" id="search">
+              <label class="mdl-textfield__label" for="search">Enter your query...</label>
+            </div>
+          </div>
+          -->
+          <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="hdrbtn">
+            <i class="material-icons">more_vert</i>
+          </button>
+          <ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="hdrbtn">
+            <li class="mdl-menu__item"><a href="javascript:set_user_current_location()">Current Location</a></li>
+          </ul>
+        </div>
+        <meta name="propeller" content="d8fe460b266dad3d5e4d8059db739fbc" />
+      </header>
+      <div class="demo-drawer mdl-layout__drawer mdl-color--white mdl-color-text--white">
+        <nav class="demo-navigation mdl-navigation mdl-color--red-900">
+          <a class="mdl-navigation__link" href="javascript:query_pokemon()"><i class="mdl-color-text--white material-icons" role="presentation">home</i>Pokemon</a>
+          <a class="mdl-navigation__link" href="javascript:query_pokestop()"><i class="mdl-color-text--white material-icons" role="presentation">gps_fixed</i>Pokestop</a>
+          <a class="mdl-navigation__link" href="javascript:query_gym()"><i class="mdl-color-text--white material-icons" role="presentation">flash_on</i>Gym</a>
+          <a class="mdl-navigation__link" href="javascript:toggle_faq_list()"><i class="mdl-color-text--white material-icons" role="presentation">question_answer</i>FAQ</a>
+          <div class="mdl-layout-spacer"></div>
+          <a class="mdl-navigation__link" href="mailto:info@mypokemon.io"><i class="mdl-color-text--white material-icons" role="presentation">help_outline</i><span>info@mypokemon.io</span></a>
+        </nav>
+      </div>
+      <main class="mdl-layout__content mdl-color--grey-100">
+        <div class="mdl-grid demo-content">
+
+          <!-- FAQ cards -->
+          <div id="faq1" class="faq-card demo-updates mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--12-col-desktop">
+            <div class="mdl-card__title mdl-color--teal-300">
+              <h2 class="mdl-card__title-text">What is mypokemon.io map?</h2>
+            </div>
+            <div class="mdl-card__supporting-text mdl-color-text--grey-600">
+              <p>This Pokemon map shows you where are the pokemons and the estimated time they are going to disappear.</p>
+              <p>You can find all Pokemon near you in real time for Pokemon Go App Game. Pokemon will be marked on the map along with their disappearence count down timer on the map. The map marker is real time, meaning they are currently exists in the Pokemon Go app and can be found exact same spot on the map.</p>
+            </div>
+          </div>
+
+          <div id="faq2" class="faq-card demo-updates mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--12-col-desktop">
+            <div class="mdl-card__title mdl-color--teal-300">
+              <h2 class="mdl-card__title-text">Why there is no pokemon in my area?</h2>
+            </div>
+            <div class="mdl-card__supporting-text mdl-color-text--grey-600">
+              <p>Since we are waiting for our agents to update pokemon location from various devices, it might take a while for them to check different location and update the map. If you do not see pokemon for over 24 hours, please contact <a href"support@mypokemon.io">support@mypokemon.io</a></p>
+            </div>
+          </div>
+
+          <div id="faq3" class="faq-card demo-updates mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--12-col-desktop">
+            <div class="mdl-card__title mdl-color--teal-300">
+              <h2 class="mdl-card__title-text">Why do I see some Pokemon in game but not on your map?</h2>
+            </div>
+            <div class="mdl-card__supporting-text mdl-color-text--grey-600">
+              <p>Sorry, our map data is not perfect at this time, some pokemons might missing from the map.</p>
+              <p>Zoom in the map and wait for one more minute to see if it helps.</p>
+            </div>
+          </div>
+
+          <div id="faq4" class="faq-card demo-updates mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--12-col-desktop">
+            <div class="mdl-card__title mdl-color--teal-300">
+              <h2 class="mdl-card__title-text">Any tips?</h2>
+            </div>
+            <div class="mdl-card__supporting-text mdl-color-text--grey-600">
+              <p>Open the map and zoom in to the area you can reach, then keep your phone open so that map will update automatically</p>
+              <p>When you see the pokemon you want to catch, go catch it!</p>
+              <p>Note: Rarer pokemons might disappear sooner than normal pokemons. Make sure to keep an eye on the timers! </p>
+            </div>
+          </div>
+
+          <div id="faq5" class="faq-card demo-updates mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--12-col-desktop">
+            <div class="mdl-card__title mdl-color--teal-300">
+              <h2 class="mdl-card__title-text">How can I volunteer to be one of the agent?</h2>
+            </div>
+            <div class="mdl-card__supporting-text mdl-color-text--grey-600">
+              <p>You may reach us via <a href="mailto:volunteer@mypokemon.io">volunteer@mypokemon.io</a></p>
+              <p>We are going to teach you step by step how to contribute to this map</p>
+            </div>
+          </div>
+
+          <div id="faq6" class="faq-card demo-updates mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--12-col-desktop">
+            <div class="mdl-card__title mdl-color--teal-300">
+              <h2 class="mdl-card__title-text">Can I request more features?</h2>
+            </div>
+            <div class="mdl-card__supporting-text mdl-color-text--grey-600">
+              <p>Sure, you may reach us via <a href="mailto:info@mypokemon.io">info@mypokemon.io</a></p>
+            </div>
+          </div>
+
+
+          <!-- end of FAQ cards -->
+
+          <!-- maps -->
+          <div class="demo-graphs mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col mdl-grid--no-spacing">
+            <!-- Add Map -->
+            <div id="pokemonmap" viewBox="0 0 500 250" class="demo-graph">
+            </div>
+
+            <div id="map_progressbar" class="mdl-progress mdl-shadow--2dp mdl-cell--12-col mdl-js-progress mdl-progress__indeterminate">
+              <p align="center" class="mdl-color-text--green-500">Searching this area...</p>
+            </div>
+          </div>
+
+          <script type="text/javascript"> 
+            var infolinks_pid = 2851536; var infolinks_wsid = 0; 
+          </script> 
+          <script type="text/javascript" src="//resources.infolinks.com/js/infolinks_main.js"></script>
+
+          <!-- adsense -->
+          <div class="mdl-color--white mdl-cell mdl-cell--12-col" style="height: 10vh;">
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <!-- mypokemonio -->
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-7776910507991738"
+                 data-ad-slot="9219436609"
+                 data-ad-format="auto"></ins>
+            <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+          </div>
+           <!-- adsense -->
+          <div class="demo-cards mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
+            <div class="demo-separator mdl-cell--1-col"></div>
+          </div>
+          
+          <p align="center" class="mdl-color-text--black">© mypokemon.io 2016. All rights reserved.</p>
+
+
+
+        </div>
+      </main>
+    </div>
+
+    <!--
+    <ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-7776910507991738" data-ad-slot="1980325006" data-adsbygoogle-status="done"><ins id="aswift_0_expand" style="display:inline-table;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:728px;background-color:transparent"><ins id="aswift_0_anchor" style="display:block;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:728px;background-color:transparent"><iframe width="728" height="90" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;"></iframe></ins></ins></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+    -->
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-78900217-2', 'auto');
+      ga('send', 'pageview');
+    </script>
+
+    <script type="text/javascript" src="lib/axios/dist/axios.standalone.js"></script>
+    <script type="text/javascript" src="lib/CryptoJS/rollups/hmac-sha256.js"></script>
+    <script type="text/javascript" src="lib/CryptoJS/rollups/sha256.js"></script>
+    <script type="text/javascript" src="lib/CryptoJS/components/hmac.js"></script>
+    <script type="text/javascript" src="lib/CryptoJS/components/enc-base64.js"></script>
+    <script type="text/javascript" src="lib/url-template/url-template.js"></script>
+    <script type="text/javascript" src="lib/apiGatewayCore/sigV4Client.js"></script>
+    <script type="text/javascript" src="lib/apiGatewayCore/apiGatewayClient.js"></script>
+    <script type="text/javascript" src="lib/apiGatewayCore/simpleHttpClient.js"></script>
+    <script type="text/javascript" src="lib/apiGatewayCore/utils.js"></script>
+    <script type="text/javascript" src="apigClient.js"></script>
+    <script src='map.js'></script>
+    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?branch=release&callback=loadMapScenario&s=1' async defer></script>
+    <script src="https://code.getmdl.io/1.1.3/material.min.js"></script>
+
+  </body>
+</html>
