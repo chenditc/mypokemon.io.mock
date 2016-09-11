@@ -74,6 +74,8 @@ function get_pushpin_from_map_item(map_item) {
         var icon_url = undefined;
         var title = "";
 
+        console.log(map_item);
+
         // pokemon logic
         if (map_item['pokemon_id'] !== undefined) {
             if (map_item['expire'] <= now_time * 1000) {
